@@ -1,4 +1,4 @@
-import pytest
+import pytest   # type: ignore
 from main import create_college_assistant
 
 # Define the queries as requested by the assignment
@@ -65,6 +65,9 @@ def test_agent_responses(agent, query_data):
     output_text = response["output"]
     assert len(output_text.strip()) > 0, "Agent returned an empty response"
     
+    # Clean the output to ignore commas in formatted numbers
+    clean_output = output_text.lower().replace(",", "")
+    
     # Check that expected calculation results/keywords appear in the final response
     for keyword in expected_keywords:
-        assert keyword.lower() in output_text.lower(), f"Expected to find '{keyword}' in response: {output_text}"
+        assert keyword.lower() in clean_output, f"Expected to find '{keyword}' in response: {output_text}"
