@@ -71,3 +71,8 @@ def test_agent_responses(agent, query_data):
     # Check that expected calculation results/keywords appear in the final response
     for keyword in expected_keywords:
         assert keyword.lower() in clean_output, f"Expected to find '{keyword}' in response: {output_text}"
+
+if __name__ == "__main__":
+    import sys
+    # -v for verbose output, -s to disable stdout capturing so the conversation prints in the terminal
+    sys.exit(pytest.main(["-v", "-s", __file__]))
